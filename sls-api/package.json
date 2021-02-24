@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.1.0",
+  "description": "Boujie.co backend services",
+  "main": "handler.js",
+  "scripts": {
+    "test": "serverless-bundle test",
+    "deploy": "serverless deploy -dev | tee deploy.out"
+  },
+  "author": "",
+  "devDependencies": {
+    "serverless-bundle": "^1.2.5",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-iam-roles-per-function": "^2.0.2"
+  },
+  "dependencies": {}
+}

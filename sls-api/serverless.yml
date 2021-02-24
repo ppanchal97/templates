@@ -1,0 +1,39 @@
+# NOTE: update this with your service name
+service: api-name
+
+# Create an optimized package for our functions 
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-domain-manager # domain mapping
+  - serverless-iam-roles-per-function
+  - serverless-sentry
+
+custom:
+  customDomain:
+    domainName: "api.domain.co"
+    basePath: 'x-api-${env:STAGE}'
+    stage: ${env:STAGE}
+    createRoute53Record: false
+  sentry:
+    dsn: 'sentry-dsn'
+
+provider:
+  name: aws
+  runtime: ${env:NODERUNTIME}
+  stage: ${env:STAGE}
+  region: ${env:REGION}
+  versionFunctions: false
+  logRetentionInDays: 1
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
